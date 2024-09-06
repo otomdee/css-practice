@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #293341;
+}
+
+.container {
+    position: relative;
+    height: 100%;
+    width: 300px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+#carousel {
+    height: 300px;
+    width: 300px;
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.slide {
+    height: 300px;
+    width: 300px;
+    display: none;
+}
+
+.displaySlide {
+    display: block;
+}
+
+#carousel > button {
+    position: absolute;
+    top: 50%;
+    font-size: 2rem;
+    background-color: hsla(0, 0%, 0%, 0.429);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+#dotsDiv {
+    position: relative;
+    bottom: 0;
+    top: -15px;
+    height: 15px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#dots {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dot {
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+    background-color: rgb(191, 188, 188);
+}
+
+.dot:hover {
+    cursor: pointer;
+}
+
+.dot-clicked {
+    background-color: black;
+}
