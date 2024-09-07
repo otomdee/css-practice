@@ -4,20 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>getAgif</title>
-    
+    <style>
+        #gifSearch {
+            margin: 20px 0;
+        }
+        #error {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 <body>
+    <form id="gifSearch">
+        <label for="search">Search for a random gif:</label>
+        <input type="text" name="search" id="search">
+        <button type="submit">Search</button>
+    </form>
+    <span id="error"></span>
     <img>
     <script>
         const img = document.querySelector("img");
-        console.log(img);
-        fetch('https://api.giphy.com/v1/gifs/translate?api_key=SPxNs4uCnvOCWCRWBXC9GWJt7nkuVAwX&s=dogs', {
+        const form = document.querySelector("#gifSearch");
+        const input = document.querySelector("#search");
+        const errorSpan = document.querySelector("#error");
+        const key = "SPxNs4uCnvOCWCRWBXC9GWJt7nkuVAwX";
+
+        function fetchImage(name) {
+            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${key}&s=${name}`, {
             mode: 'cors'})
             .then(function(response) {
-                return(response.json())})
-            .then(function(response) {
-                img.src = response.data.images.original.url;
+                if (!response.ok) {
+                    errorSpan.textContent = "Error fetching image";
+                }
+                else {
+                    response.json()
+                    .then(function(response) {
+                    img.src = response.data.images.original.url;
+                    });
+                }             
             })
+        }
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            fetchImage(input.value);
+        })
     </script>
 </body>
 </html>
