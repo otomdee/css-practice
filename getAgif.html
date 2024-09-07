@@ -28,22 +28,22 @@
         const errorSpan = document.querySelector("#error");
         const key = "SPxNs4uCnvOCWCRWBXC9GWJt7nkuVAwX";
 
-        function fetchImage(name) {
-            fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${key}&s=${name}`, {
-            mode: 'cors'})
-            .then(function(response) {
-                if (!response.ok) {
+        async function fetchImage(name) {
+            try {
+                const imgData = await fetch(`https://api.giphy.com/v1/gifs/translate?api_key=${key}&s=${name}`, {
+                mode: 'cors'});
+                if (!imgData.ok) {
                     errorSpan.textContent = "Error fetching image";
                 }
                 else {
-                    response.json()
-                    .then(function(response) {
-                    img.src = response.data.images.original.url;
-                    });
-                }             
-            })
+                    const jsonData = await imgData.json();
+                    img.src = jsonData.data.images.original.url;
+                }                  
+            }
+            catch(error) {
+                errorSpan.textContent = "Error fetching image";
+            }
         }
-
         form.addEventListener("submit", e => {
             e.preventDefault();
             fetchImage(input.value);
