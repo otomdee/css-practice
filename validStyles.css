@@ -1,0 +1,17 @@
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+.invalid {
+    border-color: red;
+}
+.valid {
+    border-color: green;
+}
+input {
+    display: block;
+    margin-bottom: 10px;
+}
+label {
+    margin-top: 10px;
+}
